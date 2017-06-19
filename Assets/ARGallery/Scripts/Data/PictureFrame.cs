@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+
+
 using UnityEngine;
 
-public class PictureFrame : MonoBehaviour {
+[System.Serializable]
+public class PictureFrame
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public string id;
+    public GameObject PictureFrameObject;
+    public Texture Image;
 }
