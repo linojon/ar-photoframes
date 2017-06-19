@@ -7,17 +7,40 @@ using Vuforia;
 public class PictureFrameDisplay : MonoBehaviour
 {
 
-    public Texture ImageTexture;
-    //The application could be optimized by using object pooling
-    public GameObject FrameSpawnPoint;
+    public Renderer ImageRenderer;
+    public Transform FrameSpawnPoint;
 
     [SerializeField]
-    private PictureFrame pictureFrame;
-    private ImageTargetBehaviour imageTargetBehaviour;
+    private GameObject pictureFramePrefab;
+    private GameObject currentPrefab;
 
-    void Start()
+
+    public void UpdateFramePrefab(GameObject framePrefab)
     {
-        imageTargetBehaviour = GetComponent<ImageTargetBehaviour>();
-        pictureFrame = new PictureFrame(imageTargetBehaviour.name);
+        if (pictureFramePrefab == framePrefab) return;
+
+        if(currentPrefab != null)
+            Destroy(currentPrefab);
+        currentPrefab = CreateFrame(framePrefab);
     }
+
+    public void UpdateImage(Texture imageTexture)
+    {
+        if (ImageRenderer.material.mainTexture != imageTexture)
+        {
+            ImageRenderer.material.mainTexture = imageTexture;
+        }
+    }
+
+    //The application could be optimized by using object pooling
+     private GameObject CreateFrame(GameObject frameGameObject)
+    {
+        //Creates a new gameobject with the same position and rotation as FrameSpawnPoint. It also sets the frame as a child
+        //of FrameSpawnPoint. 
+        GameObject newFrame = Instantiate(frameGameObject, FrameSpawnPoint.position, FrameSpawnPoint.rotation, FrameSpawnPoint);
+        return newFrame;
+    }
+
+
+   
 }
