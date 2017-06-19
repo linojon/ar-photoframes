@@ -10,12 +10,16 @@ public class ImageOptionSelected : UnityEvent<Texture>
 
 public class ImageOption : MonoBehaviour 
 {
-    public Texture TextureOption;
+    private Texture textureOption;
     public ImageOptionSelected OnImageOptionSelected = new ImageOptionSelected();
 
+    void Start()
+    {
+        textureOption = GetComponent<Renderer>().material.mainTexture;
+    }
     void OnMouseDown()
     {
-        OnImageOptionSelected.Invoke(TextureOption);
+        OnImageOptionSelected.Invoke(textureOption);
         print("Image Selected");
     }
 }

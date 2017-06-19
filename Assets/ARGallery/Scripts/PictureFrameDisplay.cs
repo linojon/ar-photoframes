@@ -3,21 +3,80 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-[RequireComponent(typeof(ImageTargetBehaviour))]
 public class PictureFrameDisplay : MonoBehaviour
 {
 
     public Renderer ImageRenderer;
     public Transform FrameSpawnPoint;
-
-    [SerializeField]
-    private GameObject pictureFramePrefab;
     private GameObject currentPrefab;
+    private ImageOption[] imageOptions;
+    private FrameOption[] frameOptions;
+    private bool showOptions;
+    void Start()
+    {
+        RegisterOptions();
+    }
+
+    void RegisterOptions()
+    {
+       imageOptions = GetComponentsInChildren<ImageOption>();
+        for (int i = 0; i < imageOptions.Length; i++)
+        {
+            imageOptions[i].OnImageOptionSelected.AddListener(UpdateImage);
+        }
+
+       frameOptions = GetComponentsInChildren<FrameOption>();
+        for (int i = 0; i < frameOptions.Length; i++)
+        {
+            frameOptions[i].OnImageOptionSelected.AddListener(UpdateFramePrefab);
+        }
+    }
+
+    void HideOptions()
+    {
+        for (int i = 0; i < imageOptions.Length; i++)
+        {
+            imageOptions[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < frameOptions.Length; i++)
+        {
+            frameOptions[i].gameObject.SetActive(false);
+        }
+
+    }
+
+    void ShowOptions()
+    {
+        for (int i = 0; i < imageOptions.Length; i++)
+        {
+            imageOptions[i].gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < frameOptions.Length; i++)
+        {
+            frameOptions[i].gameObject.SetActive(true);
+        }
+    }
+
+    void OnMouseDown()
+    {
+        if (showOptions)
+        {
+            ShowOptions();
+        }
+        else
+        {
+           HideOptions();
+        }
+
+        showOptions = !showOptions;
+    }
 
 
     public void UpdateFramePrefab(GameObject framePrefab)
     {
-        if (pictureFramePrefab == framePrefab) return;
+        if (currentPrefab == framePrefab) return;
 
         if(currentPrefab != null)
             Destroy(currentPrefab);
