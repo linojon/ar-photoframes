@@ -23,6 +23,12 @@ public class GalleryOptionView : MonoBehaviour
     public readonly GameObjectEvent OnGameObjectSelected = new GameObjectEvent();
     public readonly ImageTextureEvent OnImageTextureSelected = new ImageTextureEvent();
 
+
+    void Start()
+    {
+        //disable the gameobject on start. the controller will activate the items.
+        gameObject.SetActive(false);
+    }
     private void OnMouseDown()
     {
         print("Option Selected");

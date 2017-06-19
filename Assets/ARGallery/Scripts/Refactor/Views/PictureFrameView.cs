@@ -10,7 +10,9 @@ public class PictureFrameEvent : UnityEvent<PictureFrameView>
 
 /// <summary>
 /// Took place of the PictureFrameDisplay. This script now just updates the augment when the data is changed.
+/// Subscribes itself to the controller. Edits the Image and frame . Sends click events, sends found and lost events.
 /// </summary>
+[RequireComponent(typeof(BoxCollider))]
 public class PictureFrameView : MonoBehaviour,ITrackableEventHandler
 {
     [Tooltip("This is set at run time")]
@@ -25,18 +27,23 @@ public class PictureFrameView : MonoBehaviour,ITrackableEventHandler
 
     public readonly PictureFrameEvent OnPictureFrameFound = new PictureFrameEvent();
     public readonly PictureFrameEvent OnPictureFrameLost = new PictureFrameEvent();
-
+    public UnityEvent OnPointerDown = new UnityEvent();
     // Use this for initialization
     void Start ()
 	{
 	    Id = trackableBehaviour.TrackableName;
         trackableBehaviour.RegisterTrackableEventHandler(this);
         if (pictureFrame == null)
-	    {
-	        GalleryController galleryController = FindObjectOfType<GalleryController>();
-	        pictureFrame = galleryController.RegisterFrame(this);
+        {
+         
+            GalleryController galleryController = FindObjectOfType<GalleryController>();
+            //Subscribes the option toggles from the controller
+            OnPointerDown.AddListener(galleryController.ToggleOptions);
+            //Subscribes to value changes in the pictureframe.cs
+            pictureFrame = galleryController.RegisterFrame(this);
 	        pictureFrame.OnImageTextureChange.AddListener(SetImage);
 	        pictureFrame.OnGameObjectChange.AddListener(SetFramePrefab);
+          
 	    }
 
 	}
@@ -56,6 +63,11 @@ public class PictureFrameView : MonoBehaviour,ITrackableEventHandler
         {
             ImageRenderer.material.mainTexture = imageTexture;
         }
+    }
+
+    void OnMouseDown()
+    {
+        OnPointerDown.Invoke();
     }
 
 

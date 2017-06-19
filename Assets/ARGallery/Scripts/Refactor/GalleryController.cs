@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GalleryController : MonoBehaviour
 {
+    [SerializeField]
+    private ClickableObject pictureClickableObject;
+
+    [SerializeField]
+    private ClickableObject frameClickableObject;
+
     private string currentFrameId;
     private GalleryModel galleryModel = new GalleryModel();
     private GalleryOptionView[] galleryOptionViews = new GalleryOptionView[0];
@@ -12,6 +18,8 @@ public class GalleryController : MonoBehaviour
     void Start()
     {
         RegisterOptions();
+        RegisterClickableObjects();
+        HideText();
     }
 
 
@@ -25,12 +33,8 @@ public class GalleryController : MonoBehaviour
         else
         {
             HideOptions();
+            HideText();
         }
-    }
-
-    public void ShowImageOptions(bool showImages)
-    {
-        ShowOptions(showImages);
     }
 
     public PictureFrame RegisterFrame(PictureFrameView pictureFrameView)
@@ -83,6 +87,7 @@ public class GalleryController : MonoBehaviour
         {
             currentFrameId = "";
             HideOptions();
+            HideText();
         }
           
     }
@@ -101,6 +106,7 @@ public class GalleryController : MonoBehaviour
     //The default value of showing images is false
     private void ShowOptions(bool showImages = false)
     {
+        ToggleText(showImages);
         optionsVisable = true;
         for (int i = 0; i < galleryOptionViews.Length; i++)
         {
@@ -115,5 +121,41 @@ public class GalleryController : MonoBehaviour
         {
             galleryOptionViews[i].gameObject.SetActive(false);
         }
+    }
+
+    private void ShowImages()
+    {
+        ShowOptions(true);
+    }
+
+    private void ShowFrames()
+    {
+        ShowOptions();
+    }
+
+    private void RegisterClickableObjects()
+    {
+        pictureClickableObject.OnObjectClicked.AddListener(ShowImages);
+        frameClickableObject.OnObjectClicked.AddListener(ShowFrames);
+    }
+
+    private void ToggleText(bool showImages)
+    {
+        if (showImages)
+        {
+            pictureClickableObject.gameObject.SetActive(false);
+            frameClickableObject.gameObject.SetActive(true);
+        }
+        else
+        {
+            pictureClickableObject.gameObject.SetActive(true);
+            frameClickableObject.gameObject.SetActive(false);
+        }
+    }
+
+    private void HideText()
+    {
+        frameClickableObject.gameObject.SetActive(false);
+        pictureClickableObject.gameObject.SetActive(false);
     }
 }
