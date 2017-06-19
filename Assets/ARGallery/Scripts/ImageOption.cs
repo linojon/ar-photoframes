@@ -5,10 +5,13 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 
+public class ImageOptionSelected : UnityEvent<Texture>
+{
+}
 public class ImageOption : MonoBehaviour 
 {
     private Texture textureOption;
-
+    public ImageOptionSelected OnImageOptionSelected = new ImageOptionSelected();
 
     void Start()
     {
@@ -16,6 +19,7 @@ public class ImageOption : MonoBehaviour
     }
     void OnMouseDown()
     {
+        OnImageOptionSelected.Invoke(textureOption);
         print("Image Selected");
     }
 }
