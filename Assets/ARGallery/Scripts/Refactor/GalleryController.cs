@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GalleryController : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class GalleryController : MonoBehaviour
 
     [SerializeField]
     private ClickableObject frameClickableObject;
+
+    [SerializeField]
+    private Text HelpText;
 
     private string currentFrameId;
     private GalleryModel galleryModel = new GalleryModel();
@@ -20,6 +24,29 @@ public class GalleryController : MonoBehaviour
         RegisterOptions();
         RegisterClickableObjects();
         HideText();
+    }
+
+    void Update()
+    {
+        if (string.IsNullOrEmpty(currentFrameId))
+        {
+            HelpText.text = "Searching for target.";
+        }
+        else
+        {
+            if (optionsVisable == true)
+            {
+                HelpText.text = "Click on the frame to close.";
+            }
+
+            if (optionsVisable == false)
+            {
+                HelpText.text = "Click on the picture to open options.";
+            }
+        }
+
+     
+
     }
 
 
