@@ -43,13 +43,13 @@ public class GalleryController : MonoBehaviour
         if (registeredPictureFrame == null)
         {
             //show options if object is new
+        
             pictureFrameView.OnPictureFrameFound.AddListener(SetCurrentFrame);
             pictureFrameView.OnPictureFrameLost.AddListener(LoseFrame);
             return galleryModel.CreatePictureFrame(pictureFrameView.Id);
         }
         else
         {
-            //Hide options if object is old
             return registeredPictureFrame;
         }
     }
@@ -67,18 +67,9 @@ public class GalleryController : MonoBehaviour
     }
 
     private void SetCurrentFrame(PictureFrameView pictureFrameView)
-    {
-        PictureFrame registeredPictureFrame = galleryModel.FindFrameById(pictureFrameView.Id);
-        if (registeredPictureFrame == null)
-        {
-            //show options if object is new
-            ShowOptions();
-            currentFrameId = pictureFrameView.Id;
-        }
-        else
-        {
-            currentFrameId = pictureFrameView.Id;
-        }
+    {  
+        currentFrameId = pictureFrameView.Id;
+        ShowOptions();
     }
 
     private void LoseFrame(PictureFrameView pictureFrameView)
