@@ -14,6 +14,7 @@ public class GalleryOptionView : MonoBehaviour
     [SerializeField]
     private int optionIndex;
 
+    [SerializeField]
     private bool isImageOption;
 
     [SerializeField]
