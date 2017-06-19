@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+public class PrefabOptionSelected : UnityEvent<GameObject>
+{
+}
 public class FrameOption : MonoBehaviour {
+  
+        public GameObject PrefabOption;
+        public PrefabOptionSelected OnImageOptionSelected = new PrefabOptionSelected();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        void OnMouseDown()
+        {
+            OnImageOptionSelected.Invoke(PrefabOption);
+            print("Prefab Selected");
+        }
+    
 }
