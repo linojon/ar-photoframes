@@ -8,7 +8,7 @@ public class PrefabOptionSelected : UnityEvent<GameObject>
 }
 public class FrameOption : MonoBehaviour {
   
-        private GameObject prefabOption;
+    private GameObject prefabOption;
     public PrefabOptionSelected OnImageOptionSelected = new PrefabOptionSelected();
 
     void Start()

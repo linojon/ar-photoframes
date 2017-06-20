@@ -10,23 +10,33 @@ ModelImporter:
     100004: Text.001
     100006: FramesText
     100008: PhotosText
+    100010: NextText
+    100012: PreviousText
     400000: //RootNode
     400002: Text
     400004: Text.001
     400006: FramesText
     400008: PhotosText
+    400010: NextText
+    400012: PreviousText
     2300000: Text
     2300002: Text.001
     2300004: FramesText
     2300006: PhotosText
+    2300008: NextText
+    2300010: PreviousText
     3300000: Text
     3300002: Text.001
     3300004: FramesText
     3300006: PhotosText
+    3300008: NextText
+    3300010: PreviousText
     4300000: Text.001
     4300002: Text
     4300004: FramesText
     4300006: PhotosText
+    4300008: PreviousText
+    4300010: NextText
   materials:
     importMaterials: 1
     materialName: 0
