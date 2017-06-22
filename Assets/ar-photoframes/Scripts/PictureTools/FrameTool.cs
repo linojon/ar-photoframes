@@ -18,7 +18,6 @@ public class FrameTool : PictureToolBase
     public override void InitTool(PictureFrame targetPictureFrame)
     {
         EnableClickableObjects();
-        confirmObject.gameObject.SetActive(true);
         base.InitTool(targetPictureFrame);
     }
 
@@ -62,6 +61,7 @@ public class FrameTool : PictureToolBase
 
     void ObjectClicked(GameObject clickedGameObject)
     {
+        confirmObject.gameObject.SetActive(true);
         TargetPictureFrame.SetFrame(clickedGameObject);
     }
 

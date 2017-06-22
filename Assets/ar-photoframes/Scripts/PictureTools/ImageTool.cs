@@ -76,6 +76,7 @@ public class ImageTool : PictureToolBase
 
     void ObjectClicked(GameObject clickedGameObject)
     {
+        
         TargetPictureFrame.SetTexture(clickedGameObject.GetComponent<Renderer>().material.mainTexture);
     }
 
@@ -84,7 +85,6 @@ public class ImageTool : PictureToolBase
     {
         for (int i = 0; i < ImageClickableObjects.Length; i++)
         {
-            print(ImageTextures[i + indexOffset]);
             //Sets the texture for the images based on index
             ImageClickableObjects[i].GetComponent<Renderer>().material.mainTexture = ImageTextures[i + indexOffset];
         }

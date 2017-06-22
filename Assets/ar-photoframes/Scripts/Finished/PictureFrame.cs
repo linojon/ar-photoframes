@@ -23,7 +23,7 @@ public class PictureFrame : MonoBehaviour {
     public void SetTexture(Texture imageTexture)
     {
         imageRenderer.gameObject.SetActive(true);
-
+        print(imageTexture);
         if (imageRenderer.material.mainTexture != imageTexture)
         {
             imageRenderer.material.mainTexture = imageTexture;
