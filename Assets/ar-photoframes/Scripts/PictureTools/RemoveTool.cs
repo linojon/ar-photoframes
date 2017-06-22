@@ -11,7 +11,10 @@ public class RemoveTool : PictureToolBase
       
         base.InitTool(targetPictureFrame);
         //This doesn't follow good design. Help?
-        Destroy(targetPictureFrame.gameObject);
+        if (targetPictureFrame)
+        {
+            Destroy(targetPictureFrame.gameObject);
+        }
         AppStateManager.instance.SetState(AppState.VIEW);
     }
 

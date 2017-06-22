@@ -21,9 +21,14 @@ public class FollowPictureFrame : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        if (trackedTransform!=null && AppStateManager.instance.CurrentAppState != AppState.FRAME)
-        {
-            transform.position = trackedTransform.position;
+	    if (trackedTransform != null && AppStateManager.instance.CurrentAppState != AppState.FRAME)
+	    {
+	        transform.position = trackedTransform.position;
+	    }
+	    else
+	    {
+            if(AppStateManager.instance.currentWallTarget)
+            transform.position = AppStateManager.instance.currentWallTarget.transform.position;
         }
     }
 }
