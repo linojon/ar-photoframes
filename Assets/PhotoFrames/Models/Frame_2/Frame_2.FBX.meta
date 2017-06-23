@@ -13,8 +13,10 @@ ModelImporter:
     400004: Picture
     2300000: Frame_2
     2300002: Picture
+    2300004: //RootNode
     3300000: Frame_2
     3300002: Picture
+    3300004: //RootNode
     4300000: Picture
     4300002: Frame_2
   materials:

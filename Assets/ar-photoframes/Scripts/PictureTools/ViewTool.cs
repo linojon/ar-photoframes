@@ -60,7 +60,6 @@ public class ViewTool : PictureToolBase
     {
         Transform wallTransform = AppStateManager.instance.currentWallTarget.transform;
         GameObject newFrame = Instantiate(DefaultFrameGameObject, wallTransform);
-        newFrame.transform.localScale = newFrame.transform.localScale * wallTransform.localScale.x;
         PictureFrame pictureFrame = newFrame.GetComponent<PictureFrame>();
         AppStateManager.instance.SetCurrentPictureFrame(pictureFrame); 
         AppStateManager.instance.SetState(AppState.FRAME);
