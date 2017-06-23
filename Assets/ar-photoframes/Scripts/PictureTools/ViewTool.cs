@@ -6,7 +6,7 @@ public class ViewTool : PictureToolBase
 {
     public ClickableObject AddClickableObject;
     public GameObject DefaultFrameGameObject;
-
+    public LayerMask FrameLayerMask;
     void Start()
     {
         AddClickableObject.gameObject.SetActive(false);
@@ -29,10 +29,11 @@ public class ViewTool : PictureToolBase
 
    private void TrySelectObject()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit,Mathf.Infinity, FrameLayerMask))
         {
+            Debug.DrawLine(ray.origin, hit.point);
             print("I'm looking at " + hit.transform.name);
             PictureFrame selectPictureFrame = hit.transform.GetComponentInParent<PictureFrame>();
             if (selectPictureFrame!=null)
