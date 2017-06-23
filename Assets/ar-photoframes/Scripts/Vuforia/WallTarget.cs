@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
+/// <summary>
+/// To remove Vuforia. Remove the using and delete all conflicts. Set the wall target using HL code.
+/// </summary>
+
 [RequireComponent(typeof(BoxCollider))]
 public class WallTarget : MonoBehaviour,
     ITrackableEventHandler
